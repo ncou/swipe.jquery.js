@@ -57,7 +57,7 @@
 					swipe.direction = 'down';
 			}
 
-			callback(JSON.stringify(swipe));
+			callback(swipe);
 		});
 	};
 })(jQuery);
