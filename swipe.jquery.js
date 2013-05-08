@@ -1,5 +1,5 @@
 (function($) {
-  $.fn.swipe = function(callback) {
+	$.fn.swipe = function(callback) {
 		var pos = {
 			start: { x: 0, y: 0 },
 			end:   { x: 0, y: 0 }
@@ -59,5 +59,5 @@
 
 			callback(JSON.stringify(swipe));
 		});
-  };
+	};
 })(jQuery);
