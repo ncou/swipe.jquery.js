@@ -43,18 +43,12 @@
 				swipe.angle = 360 - Math.abs(swipe.angle);
 			}
 
-			switch ( true ) {
-				case swipe.angle <= 45 && swipe.angle >= 0:
-				case swipe.angle <= 360 && swipe.angle >= 315:
-					swipe.direction = 'left';
-
-					break;
-				case swipe.angle >= 135 && swipe.angle <= 225:
-					swipe.direction = 'right';
-
-					break;
-				case swipe.angle > 45 && swipe.angle < 135:
-					swipe.direction = 'down';
+			if ( (swipe.angle <= 45 && swipe.angle >= 0) || (swipe.angle <= 360 && swipe.angle >= 315) ) {
+				swipe.direction = 'left';
+			} else if ( swipe.angle >= 135 && swipe.angle <= 225 ) {
+				swipe.direction = 'right';
+			} else if ( swipe.angle > 45 && swipe.angle < 135 ) {
+				swipe.direction = 'down';
 			}
 
 			callback(swipe);
