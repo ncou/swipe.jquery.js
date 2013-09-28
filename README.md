@@ -1,14 +1,13 @@
 swipe.jquery.js
 ===============
 
-A very basic jQuery plugin to get swipe direction, distance and angle on touch supported devices.
+A jQuery plugin to get swipe direction, distance, angle and speed on devices with or without touch support.
 
 Usage
 -----
 
 ```javascript
-$(document).swipe(function(swipe)) {
-	alert(JSON.stringify(swipe));
+$(document).swipe(function(e, swipe)) {
+	console.log(e, swipe);
 });
 ```
-
