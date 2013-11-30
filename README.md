@@ -7,7 +7,16 @@ Usage
 -----
 
 ```javascript
-$(document).swipe(function(e, swipe)) {
-	console.log(e, swipe);
-});
-```
+$(document).swipe()
+	.on('swipeStart', (e) => {
+		console.log('Swipe start', e.swipe);
+	})
+	.on('swipeMove', (e) => {
+		console.log('Swipe move', e.swipe);
+
+		// Log mouse position
+		console.log(e.originalEvent.pageX, e.originalEvent.pageY);
+	})
+	.on('swipeEnd', (e) => {
+		console.log('Swipe end', e.swipe);
+	});
