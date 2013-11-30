@@ -6,8 +6,6 @@
 		this.pos = { start: { x: 0, y: 0 }, end: { x: 0, y: 0 } };
 		this.startTime;
 
-		console.log(this);
-
 		el.on('touchstart', function(e) { self.touchStart(e); });
 		el.on('touchmove',  function(e) { self.touchMove(e); });
 		el.on('touchend',   function(e) { self.swipeEnd(); });
@@ -72,35 +70,33 @@
 		trigger: function(e, originalEvent) {
 			var self = this;
 
-			setTimeout(function() {
-				var
-					event = $.Event(e),
-					x = self.pos.start.x - self.pos.end.x,
-					y = self.pos.end.y - self.pos.start.y,
-					radians = Math.atan2(y, x),
-					direction = 'up',
-					distance = Math.round(Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2))),
-					angle = Math.round(radians * 180 / Math.PI),
-					speed = Math.round(distance / ( new Date().getTime() - self.startTime ) * 1000);
+			var
+				event = $.Event(e),
+				x = self.pos.start.x - self.pos.end.x,
+				y = self.pos.end.y - self.pos.start.y,
+				radians = Math.atan2(y, x),
+				direction = 'up',
+				distance = Math.round(Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2))),
+				angle = Math.round(radians * 180 / Math.PI),
+				speed = Math.round(distance / ( new Date().getTime() - self.startTime ) * 1000);
 
-				if ( angle < 0 ) {
-					angle = 360 - Math.abs(angle);
-				}
+			if ( angle < 0 ) {
+				angle = 360 - Math.abs(angle);
+			}
 
-				if ( ( angle <= 45 && angle >= 0 ) || ( angle <= 360 && angle >= 315 ) ) {
-					direction = 'left';
-				} else if ( angle >= 135 && angle <= 225 ) {
-					direction = 'right';
-				} else if ( angle > 45 && angle < 135 ) {
-					direction = 'down';
-				}
+			if ( ( angle <= 45 && angle >= 0 ) || ( angle <= 360 && angle >= 315 ) ) {
+				direction = 'left';
+			} else if ( angle >= 135 && angle <= 225 ) {
+				direction = 'right';
+			} else if ( angle > 45 && angle < 135 ) {
+				direction = 'down';
+			}
 
-				event.originalEvent = originalEvent;
+			event.originalEvent = originalEvent;
 
-				event.swipe = { x: x, y: y, direction: direction, distance: distance, angle: angle, speed: speed };
+			event.swipe = { x: x, y: y, direction: direction, distance: distance, angle: angle, speed: speed };
 
-				$(self.el).trigger(event);
-			}, 0);
+			$(self.el).trigger(event);
 		}
 	};
 
